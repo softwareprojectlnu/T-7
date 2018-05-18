@@ -39,7 +39,7 @@ export class CategoryService {
       return changes.map(a => {
         const data = a.payload.doc.data() as category;
         //commented out to try
-        //data.id = a.payload.doc.id;  
+        data.id = a.payload.doc.id;  
         return data;
       });
     });

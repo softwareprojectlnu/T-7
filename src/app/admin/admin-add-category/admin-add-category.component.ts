@@ -11,6 +11,7 @@ import { category } from '../../models/category';
 export class AddCategoryComponent implements OnInit {
   Category: category = {
     title:'',
+    id:''
   }
 
   constructor(private categoryService: CategoryService) { }
