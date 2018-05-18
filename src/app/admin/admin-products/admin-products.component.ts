@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {ProductService} from './../../services/product.service';
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AdminProductFormComponent} from '../admin-add-product/admin-add-product.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-products',
@@ -13,9 +14,11 @@ import {AdminProductFormComponent} from '../admin-add-product/admin-add-product.
 export class AdminProductsComponent {
   products$: Observable<Product[]>;
   product: Observable<Product>;
-
-  constructor(public productService: ProductService) {
+  route: Router;
+  constructor(public productService: ProductService, route: Router) {
     this.products$ = productService.getAll();
+    this.route = route;
   }
+
 
 }

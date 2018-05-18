@@ -30,8 +30,8 @@
         <select [(ngModel)]="categoryKey" #category="ngModel" name="category"
                 [class.is-invalid]="category.touched && category.invalid"
                 id="category" class="form-control" required>
-          <option *ngFor="let category of categories$ | async;" [value]="category.id">
-            {{ category.name }}
+          <option *ngFor="let category of categories | async;" [value]="category.id">
+            {{ category.title }}
           </option>
         </select>
         <div class="invalid-feedback" *ngIf="category.touched && category.invalid">
@@ -58,3 +58,4 @@
     <product-card width="150px" [product]="product"></product-card>
   </div>
 </div>
+

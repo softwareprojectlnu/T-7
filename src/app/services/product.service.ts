@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-import {Category} from './../models/category';
+import {category} from './../models/category';
 import {AngularFirestoreDocument} from 'angularfire2/firestore/document/document';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {AngularFirestoreCollection} from 'angularfire2/firestore/collection/collection';

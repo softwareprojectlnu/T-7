@@ -29,11 +29,14 @@ import {AdminProductFormComponent} from './admin/admin-add-product/admin-add-pro
 import {ProductCardComponent} from './product-card/product-card.component';
 import {DocPipe} from './doc.pipe';
 import {AppRoutingModule} from './app-routing.module';
+import {AddCategoryComponent} from './admin/admin-add-category/admin-add-category.component';
+
 class CoreModule {
 }
 
 @NgModule({
   declarations: [
+    AddCategoryComponent,
     AppComponent,
     NavbarComponent,
     ProductsComponent,
@@ -46,6 +49,7 @@ class CoreModule {
     AdminProductFormComponent,
     ProductCardComponent,
     DocPipe
+    
   ],
   imports: [
     BrowserModule,

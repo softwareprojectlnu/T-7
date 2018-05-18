@@ -4,7 +4,7 @@
     <h4 class="card-title">{{ product.title }}</h4>
     <p class="card-text">{{ product.price | currency:'EUR':'symbol' }}</p>
     <div *ngIf="product.key">
-      <button class="btn btn-block btn-primary" *ngIf="ordered==0" (click)="increase()">Order</button>
+      <button class="btn btn-block btn-primary" *ngIf="ordered==0" (click)="increase()">Add to Cart</button>
       <div class="input-group" *ngIf="ordered!=0">
         <button (click)="decrease()" class="input-group-addon btn btn-secondary">
           <i class="fa fa-minus" aria-hidden="true"></i>

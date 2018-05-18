@@ -11,9 +11,11 @@ import {AdminProductFormComponent} from './admin/admin-add-product/admin-add-pro
 import {ProductsComponent} from './products/products.component';
 import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component';
 import {AdminAuthGuard} from './guards/admin-auth-guard.service';
+import { AddCategoryComponent } from './admin/admin-add-category/admin-add-category.component';
 
 const routes: Routes = [
   {path: '', component: ProductsComponent},
+
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
   {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
@@ -37,8 +39,15 @@ const routes: Routes = [
     component: AdminProductFormComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
+  {
+    path: 'admin/categories',
+    component: AddCategoryComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
 
   {path: 'access-denied', component: AccessDeniedComponent},
+  {path: 'access-denied', component: AddCategoryComponent},
+
 ];
 
 
