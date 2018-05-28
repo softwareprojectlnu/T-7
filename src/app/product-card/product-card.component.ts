@@ -27,12 +27,16 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   increase(){
-    this.ordered++;
-    this.amountChanged();
+    if(this.ordered < this.product.quantity) {
+      this.ordered++;
+      this.amountChanged();
+    }
   }
   decrease(){
-    this.ordered--;
-    this.amountChanged();
+    if(this.product.quantity > 0) {
+      this.ordered--;
+      this.amountChanged();
+    }
   }
 
   amountChanged(){

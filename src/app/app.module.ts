@@ -30,6 +30,8 @@ import {ProductCardComponent} from './product-card/product-card.component';
 import {DocPipe} from './doc.pipe';
 import {AppRoutingModule} from './app-routing.module';
 import { CheckoutComponent } from './checkout/checkout.component';
+import {OrderService} from './services/order.service';
+
 class CoreModule {
 }
 
@@ -69,7 +71,8 @@ class CoreModule {
     CategoryService,
     ProductService,
     ShoppingCartService,
-    DocPipe
+    DocPipe,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

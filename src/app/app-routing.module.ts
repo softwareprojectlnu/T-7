@@ -17,9 +17,9 @@ const routes: Routes = [
   {path: '', component: ProductsComponent},
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
+  {path: 'order', component: OrdersComponent, canActivate: [AuthGuard]},
   {
-    path: 'admin/orders',
+    path: 'admin/orderp.ts',
     component: AdminOrdersComponent,
     canActivate: [AuthGuard, AdminAuthGuard]
   },
