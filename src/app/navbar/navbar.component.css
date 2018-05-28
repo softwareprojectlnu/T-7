@@ -1,0 +1,16 @@
+.nav-link{
+    cursor: pointer;
+}
+.form-control{
+  width: 10%;
+}
+input.btn-outline-success{
+  white-space: normal;
+  width: 6%;
+}
+
+/* I created this just for the searched results, because they were too big at the time*/
+.card{
+  width: 30%;
+  height: 30%;
+}

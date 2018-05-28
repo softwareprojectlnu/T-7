@@ -1,0 +1,40 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th style="width:200px;" scope="col">Amount</th>
+      <th scope="col">Total</th>
+      <th style="width:100px;" scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items$ | async;trackBy:trackByFn">
+      <td>{{ (item.product | doc | async)?.title }}</td>
+      <td>{{ (item.product | doc | async)?.price | currency:'EUR':'symbol' }}</td>
+      <td>
+        <div class="input-group">
+         <button (click)="updateItem(item.product, (1*item.amount)-1)" [disabled]="item.amount==0" class="btn btn-secondary input-addon	d-none d-sm-block">
+            <i class="fa fa-minus" aria-hidden="true"></i>
+          </button>
+          <input #amount [min]=0 (change)="updateItem(item.product, amount.value)" [value]="item.amount" type="number" class="form-control amount-input">
+          <button (click)="updateItem(item.product, (1*item.amount)+1)" class="btn btn-secondary input-addon d-none d-sm-block">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </button>
+        </div>
+      </td>
+      <td>{{ (item.product | doc | async)?.price * amount.value | currency:'EUR':'symbol' }}</td>
+      <td>
+        <button class="btn btn-light" (click)="delete(item.product)"><i class="fa fa-trash"></i></button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="2"></th>
+      <th>Total: </th>
+      <th>{{ cartTotal$ | async | currency:'EUR':'symbol' }}</th>
+      <th></th>
+    </tr>
+  </tfoot>
+</table>
