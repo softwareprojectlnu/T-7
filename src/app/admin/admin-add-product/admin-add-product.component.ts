@@ -2,7 +2,7 @@ import {AngularFireStorage} from 'angularfire2/storage';
 import {Product} from './../../models/product';
 import {Router, ActivatedRoute} from '@angular/router';
 import {ProductService} from './../../services/product.service';
-import {Category} from './../../models/category';
+import {category} from './../../models/category';
 import {Observable} from 'rxjs/Observable';
 import {CategoryService} from './../../services/category.service';
 import {Component, OnInit} from '@angular/core';
@@ -12,6 +12,7 @@ import 'rxjs/add/operator/take';
 @Component({
   selector: 'app-admin-add-product',
   templateUrl: './admin-add-product.component.html',
+  
   styleUrls: ['./admin-add-product.component.css']
 })
 export class AdminProductFormComponent implements OnInit {
@@ -19,7 +20,7 @@ export class AdminProductFormComponent implements OnInit {
   product: Product = <Product>{};
   categoryKey: string;
 
-  categories$: Observable<Category[]>;
+  categories: Observable<category[]>;
 
   constructor(
     private storage: AngularFireStorage,
@@ -27,7 +28,7 @@ export class AdminProductFormComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService,
     private route: ActivatedRoute) {
-    this.categories$ = categoryService.categories$;
+    this.categories = categoryService.categories;
   }
 
   ngOnInit() {

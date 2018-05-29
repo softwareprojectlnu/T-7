@@ -32,11 +32,14 @@ import {AppRoutingModule} from './app-routing.module';
 
 import {NgxPaginationModule} from 'ngx-pagination';
 import { SearchComponent } from './search/search.component';
+import {AddCategoryComponent} from './admin/admin-add-category/admin-add-category.component';
+
 class CoreModule {
 }
 
 @NgModule({
   declarations: [
+    AddCategoryComponent,
     AppComponent,
     NavbarComponent,
     ProductsComponent,
