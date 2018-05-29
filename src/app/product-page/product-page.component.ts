@@ -15,10 +15,10 @@ export class ProductPageComponent implements OnInit {
   product: Observable<Product>;
   productt: Product;
 
-  constructor(public productService: ProductService, public route: ActivatedRoute, public proClass: ProductCardComponent) {
+  constructor(public productService: ProductService, public proClass: ProductCardComponent) {
     this.productt = proClass.product;
 
-   console.log('the title is: ' + this.proClass.title1);
+//   console.log('the title is: ' + this.proClass.title1);
 
 
 

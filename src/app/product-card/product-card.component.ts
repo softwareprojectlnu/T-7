@@ -17,7 +17,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   title1: string;
 
   constructor(private cart: ShoppingCartService,) {
-    this.title1 = this.product.title;
+   // this.title1 = this.product.title;
   }
 
   ngOnInit() {
