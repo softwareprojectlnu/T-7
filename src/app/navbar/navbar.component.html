@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" routerLink="">ngShop</a>
   <button (click)="isCollapsed = !isCollapsed" class="navbar-toggler" type="button" aria-controls="navbarNavDropdown" [attr.aria-expanded]="!isCollapsed"
     aria-label="Toggle navigation">
@@ -36,8 +36,37 @@
         </div>
       </li>
     </ul>
+    <!--This is the search bar and button-->
+    <input class="form-control" type="text" placeholder="Search" aria-label="Search" [(ngModel)]="searchterm" (keydown.enter)="search($event)">
+    <input class="btn btn-outline-success" type="Submit" ngbButtonLabel="search" (click)="searchbt()" >
+  </div>
+</nav>
+
+<!--The search results are displayed here-->
+
+<ul *ngFor="let products of productss">
+
+  <div class="card">
+    <img class="card-img-top" [src]="products.imageUrl" [alt]="products.title">
+    <div class="card-body">
+      <h4 class="card-title">{{ products.title }}</h4>
+      <p class="card-text">{{ products.price | currency:'EUR':'symbol' }}</p>
+      <div *ngIf="products.key">
+        <!--Still need to import these functions below from product card into the .ts file-->
+
+        <!--<button class="btn btn-block btn-primary" *ngIf="ordered==0" (click)="increase()">Order</button>-->
+        <!--<div class="input-group" *ngIf="ordered!=0">-->
+        <!--<button (click)="decrease()" class="input-group-addon btn btn-secondary">-->
+        <!--<i class="fa fa-minus" aria-hidden="true"></i>-->
+        <!--</button>-->
+        <!--<input (change)="amountChanged()" type="number" class="form-control text-center" [(ngModel)]="ordered" />-->
+        <!--<button (click)="increase()" class="input-group-addon btn btn-secondary">-->
+        <!--<i class="fa fa-plus" aria-hidden="true"></i>-->
+        <!--</button>-->
+        <!--</div>-->
+      </div>
+    </div>
   </div>
 
-  <a class="btn btn-outline-dark" routerLink="search">search</a>
-</nav>
+</ul>
 

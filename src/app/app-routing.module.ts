@@ -11,12 +11,13 @@ import {AdminProductFormComponent} from './admin/admin-add-product/admin-add-pro
 import {ProductsComponent} from './products/products.component';
 import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component';
 import {AdminAuthGuard} from './guards/admin-auth-guard.service';
-import {SearchComponent} from './search/search.component';
+import {ProductPageComponent} from './product-page/product-page.component';
+
 const routes: Routes = [
   {path: '', component: ProductsComponent},
+  {path: 'productt/:key', component: ProductPageComponent},
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'search', component: SearchComponent},
   {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
   {
     path: 'admin/orders',

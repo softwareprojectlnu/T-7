@@ -1,9 +1,7 @@
 import * as firebase from 'firebase';
-import {Category} from './../models/category';
 import {AngularFirestoreDocument} from 'angularfire2/firestore/document/document';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {AngularFirestoreCollection} from 'angularfire2/firestore/collection/collection';
-
 import {Observable} from 'rxjs/Observable';
 import {Product} from './../models/product';
 import {Injectable} from '@angular/core';
@@ -13,7 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ProductService {
   private products: AngularFirestoreCollection<Product>;
-
+  public singleProduct: Product;
   constructor(private afs: AngularFirestore) {
     this.products = afs.collection<Product>('products');
   }

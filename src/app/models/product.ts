@@ -9,4 +9,5 @@ export interface Product {
     price: number;
     category: firebase.firestore.DocumentReference;
     imageUrl: string;
+    desc: string;
 }

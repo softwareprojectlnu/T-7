@@ -14,8 +14,11 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth, private router: Router, private fbAuth: AngularFireAuth, private userService: UserService) {
     this.user$ = fbAuth.authState.switchMap(user => {
-      if (!user) return Observable.of(null);
-      return this.userService.get(user.uid);
+      if (user) {
+        return this.userService.get(user.uid);
+      } else {
+        return Observable.of(null);
+      }
     });
   }
 

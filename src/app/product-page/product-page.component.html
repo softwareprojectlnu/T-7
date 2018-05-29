@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Price</th>
+    <th>Descripeion</th>
+
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{ productt.title }}</td>
+    <td> {{(productt.category | doc| async)?.name}}</td>
+    <td>{{ productt.price | currency:'EUR':'symbol'}}</td>
+    <td>{{ productt.desc }}</td>
+  </tr>
+  </tbody>
+</table>

@@ -1,7 +1,9 @@
-import { Subscription } from 'rxjs/Subscription';
-import { ShoppingCartService } from './../services/shopping-cart.service';
-import { Product } from './../models/product';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
+import {ShoppingCartService} from './../services/shopping-cart.service';
+import {Product} from './../models/product';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ProductService} from '../services/product.service';
 
 @Component({
   selector: 'product-card',
@@ -12,8 +14,11 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   @Input('product') product: Product;
   subscription: Subscription;
   ordered = 0;
+  title1: string;
 
-  constructor(private cart: ShoppingCartService) { }
+  constructor(private cart: ShoppingCartService,) {
+   // this.title1 = this.product.title;
+  }
 
   ngOnInit() {
     if (this.product.key) {
@@ -22,21 +27,23 @@ export class ProductCardComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   ngOnDestroy() {
     if (this.subscription) this.subscription.unsubscribe();
   }
 
-  increase(){
+  increase() {
     this.ordered++;
     this.amountChanged();
   }
-  decrease(){
+
+  decrease() {
     this.ordered--;
     this.amountChanged();
   }
 
-  amountChanged(){
-    if(this.product.key){
+  amountChanged() {
+    if (this.product.key) {
       this.cart.setItem(this.product.key, this.ordered);
     }
   }

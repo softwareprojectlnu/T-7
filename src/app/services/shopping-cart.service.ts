@@ -1,14 +1,11 @@
 import * as firebase from 'firebase';
 import { ProductService } from './product.service';
-import { Product } from './../models/product';
 import { ShoppingCart, CartItem } from './shopping-cart.service';
 import { Observable } from 'rxjs/Observable';
 import { AngularFirestoreDocument } from 'angularfire2/firestore/document/document';
 import { AngularFirestoreCollection } from 'angularfire2/firestore/collection/collection';
-import { AppUser } from './../models/app-user';
 import { AuthService } from './auth.service';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/switchMap';
@@ -38,8 +35,8 @@ export class ShoppingCartService {
 
   get cartId$(): Observable<string> {
     return this.auth.user$.switchMap(user => {
-      if (user && user.cartId) return Observable.of(user.cartId);
-      if (localStorage.getItem('cartId')) return Observable.of(localStorage.getItem('cartId'));
+      if (user && user.cartId) { return Observable.of(user.cartId); }
+      if (localStorage.getItem('cartId')) { return Observable.of(localStorage.getItem('cartId')); }
       return this.createCartId();
     });
   }
@@ -58,8 +55,8 @@ export class ShoppingCartService {
   }
 
   setItem(productKey: string, amount: number) {
-    return this.currentCart$.switchMap(currentCart =>{
-        let item = { product: this.products.getRef(productKey).ref, amount: amount };
+    return this.currentCart$.switchMap(currentCart => {
+        const item = { product: this.products.getRef(productKey).ref, amount: amount };
         return currentCart.collection<CartItem>('items').doc(productKey).set(item);
       }
     ).toPromise();

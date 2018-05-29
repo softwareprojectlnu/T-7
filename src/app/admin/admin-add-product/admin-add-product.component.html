@@ -48,6 +48,13 @@
 
         </div>
       </div>
+      <div class="form-group">
+        <label for="desc">Description</label>
+        <input #title="ngModel" [(ngModel)]="product.desc" [class.is-invalid]="title.touched && title.invalid"
+               name="desc" type="text"
+               id="desc" class="form-control" required>
+
+        </div>
 
       <button [disabled]="f.invalid" class="btn btn-primary" type="submit">Save</button>
 

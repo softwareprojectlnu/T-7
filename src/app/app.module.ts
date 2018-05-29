@@ -29,9 +29,7 @@ import {AdminProductFormComponent} from './admin/admin-add-product/admin-add-pro
 import {ProductCardComponent} from './product-card/product-card.component';
 import {DocPipe} from './doc.pipe';
 import {AppRoutingModule} from './app-routing.module';
-
-import {NgxPaginationModule} from 'ngx-pagination';
-import { SearchComponent } from './search/search.component';
+import { ProductPageComponent } from './product-page/product-page.component';
 class CoreModule {
 }
 
@@ -49,10 +47,9 @@ class CoreModule {
     AdminProductFormComponent,
     ProductCardComponent,
     DocPipe,
-    SearchComponent
+    ProductPageComponent,
   ],
   imports: [
-    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule.forRoot(),
@@ -72,7 +69,8 @@ class CoreModule {
     CategoryService,
     ProductService,
     ShoppingCartService,
-    DocPipe
+    DocPipe,
+    ProductCardComponent
   ],
   bootstrap: [AppComponent]
 })

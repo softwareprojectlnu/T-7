@@ -15,7 +15,7 @@
   <tr *ngFor="let product of products$ | async">
     <td>{{ product.title }}</td>
     <td> {{(product.category | doc| async)?.name}}</td>
-    <td>{{ product.price | currency:'EUR':'symbol' }}</td>
+    <td>{{ product.price | currency:'SEK':'symbol' }}</td>
     <td>
       <a [routerLink]="['/admin/products/', product.key]" class="btn btn-secondary">Edit</a>
     </td>

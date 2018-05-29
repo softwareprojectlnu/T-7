@@ -1,8 +1,6 @@
 import {AngularFirestore} from 'angularfire2/firestore';
-import {NavbarComponent} from './../navbar/navbar.component';
 import {AppUser} from './../models/app-user';
 import {Observable} from 'rxjs/Observable';
-import {AngularFireDatabase} from 'angularfire2/database';
 import {Injectable} from '@angular/core';
 import * as firebase from 'firebase';
 
@@ -13,7 +11,6 @@ export class UserService {
 
   save(user: firebase.User) {
     const afsUser = this.afs.doc<AppUser>('users/' + user.uid);
-
     let appUser: AppUser;
     appUser = {
       uid: user.uid,
@@ -26,7 +23,6 @@ export class UserService {
 
   get(uid: string): Observable<AppUser> {
     const afsUser = this.afs.doc<AppUser>('users/' + uid);
-
     return afsUser.valueChanges();
   }
 
