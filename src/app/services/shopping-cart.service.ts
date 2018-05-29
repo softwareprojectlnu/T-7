@@ -13,6 +13,7 @@ import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/fromPromise';
+import {HttpClient} from '@angular/common/http';
 
 export interface CartItem {
   product: firebase.firestore.DocumentReference;
@@ -26,9 +27,8 @@ export interface ShoppingCart {
 
 @Injectable()
 export class ShoppingCartService {
-
   db: AngularFirestoreCollection<ShoppingCart>;
-
+  itemsarray: any [] = [];
   constructor(private afs: AngularFirestore, private auth: AuthService, private products: ProductService) {
     this.db = afs.collection<ShoppingCart>('shopping-carts');
   }
@@ -39,8 +39,12 @@ export class ShoppingCartService {
 
   get cartId$(): Observable<string> {
     return this.auth.user$.switchMap(user => {
-      if (user && user.cartId) return Observable.of(user.cartId);
-      if (localStorage.getItem('cartId')) return Observable.of(localStorage.getItem('cartId'));
+      if (user && user.cartId) {
+        return Observable.of(user.cartId);
+      }
+      if (localStorage.getItem('cartId')) {
+        return Observable.of(localStorage.getItem('cartId'));
+      }
       return this.createCartId();
     });
   }
@@ -59,25 +63,46 @@ export class ShoppingCartService {
   }
 
   setItem(productKey: string, amount: number) {
-    return this.currentCart$.switchMap(currentCart =>{
-        let item = { product: this.products.getRef(productKey).ref, amount: amount };
+    return this.currentCart$.switchMap(currentCart => {
+        const item = {product: this.products.getRef(productKey).ref, amount: amount};
+      this.itemsarray.length = 0;
+      return currentCart.collection<CartItem>('items').doc(productKey).set(item);
+      }
+    ).toPromise();
+  }
+  setItemfinal(productKey: string, amount: number) {
+    return this.currentCart$.switchMap(currentCart => {
+        const item = {product: this.products.getRef(productKey).ref, amount: amount};
+        this.itemsarray.push(productKey);
+        this.itemsarray.push(amount);
         return currentCart.collection<CartItem>('items').doc(productKey).set(item);
       }
     ).toPromise();
   }
+
   removeItem(productKey: string): Promise<void> {
     return this.currentCart$.switchMap(currentCart =>
       currentCart.collection('items').doc(productKey).delete()
     ).toPromise();
   }
+
   getItem(productKey: string): Observable<CartItem> {
     return this.currentCart$.switchMap(currentCart =>
-        currentCart.collection('items').doc<CartItem>(productKey).valueChanges()
+      currentCart.collection('items').doc<CartItem>(productKey).valueChanges()
     );
   }
+
   getItems(): Observable<CartItem[]> {
     return this.currentCart$.switchMap(currentCart =>
       currentCart.collection<CartItem>('items').valueChanges()
     );
   }
+
+  getarrayitems(): any[] {
+    return this.itemsarray;
+  }
+  remove(key: string): Promise<void> {
+    return this.db.doc(key).delete();
+  }
+
 }

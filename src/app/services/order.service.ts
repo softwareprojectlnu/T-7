@@ -13,7 +13,6 @@ import {orderp} from '../models/orderp';
 @Injectable()
 export class OrderService {
   private orders: AngularFirestoreCollection<orderp>;
-
   constructor(private afs: AngularFirestore) {
     this.orders = afs.collection<orderp>('orders');
   }
@@ -48,8 +47,4 @@ export class OrderService {
   save(order: orderp) {
       this.add(order);
   }
-
-
-
-
 }

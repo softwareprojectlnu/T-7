@@ -31,6 +31,8 @@ import {DocPipe} from './doc.pipe';
 import {AppRoutingModule} from './app-routing.module';
 import { CheckoutComponent } from './checkout/checkout.component';
 import {OrderService} from './services/order.service';
+import { AddressComponent } from './address/address.component';
+import {AddressService} from './services/address.service';
 
 class CoreModule {
 }
@@ -49,7 +51,8 @@ class CoreModule {
     AdminProductFormComponent,
     ProductCardComponent,
     DocPipe,
-    CheckoutComponent
+    CheckoutComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,8 @@ class CoreModule {
     ProductService,
     ShoppingCartService,
     DocPipe,
-    OrderService
+    OrderService,
+    AddressService
   ],
   bootstrap: [AppComponent]
 })

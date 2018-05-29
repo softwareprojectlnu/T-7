@@ -20,6 +20,7 @@ export class CartComponent implements OnInit {
   items$: Observable<CartItem[]>;
   cartTotal$: Observable<number>;
 
+
   constructor(public product: ProductService, private cart: ShoppingCartService, private router: Router) {
     this.items$ = cart.getItems();
 

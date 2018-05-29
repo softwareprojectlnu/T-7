@@ -5,5 +5,5 @@ import * as firebase from 'firebase';
 
 export interface orderp {
   id: string;
-  products: string [];
+  products: any [];
 }

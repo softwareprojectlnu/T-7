@@ -50,11 +50,14 @@
   </div>
 </div>
 
-<button class="btn btn-outline-info" [(ngModel)]="ordered.id" type="submit" (click) = "checkout()">checkout</button>
 
+<button class="btn btn-outline-info" type="submit" (click) = "checkout()">checkout</button>
 
-
-<br>
+<tr *ngFor="let item of items$ | async;trackBy:trackByFn">
+  <div *ngIf="nu < lim">
+    {{updateItem(item.product, item.amount)}}
+  </div>
+</tr>
 
 
 
