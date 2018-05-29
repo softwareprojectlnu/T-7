@@ -1,6 +1,7 @@
 <div class="card">
-  <a [routerLink] = "['app-product-page',product.key]">
-  <img class="card-img-top" [src]="product.imageUrl" [alt]="product.title">
+  <a [routerLink] = "['/productt/',product.key]">
+
+    <img class="card-img-top" [src]="product.imageUrl" [alt]="product.title">
   </a>
   <div class="card-body">
     <h4 class="card-title">{{ product.title }}</h4>

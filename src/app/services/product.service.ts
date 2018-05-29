@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ProductService {
   private products: AngularFirestoreCollection<Product>;
-
+  public singleProduct: Product;
   constructor(private afs: AngularFirestore) {
     this.products = afs.collection<Product>('products');
   }

@@ -3,6 +3,7 @@ import {ShoppingCartService} from './../services/shopping-cart.service';
 import {Product} from './../models/product';
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {ProductService} from '../services/product.service';
 
 @Component({
   selector: 'product-card',
@@ -13,8 +14,10 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   @Input('product') product: Product;
   subscription: Subscription;
   ordered = 0;
+  title1: string;
 
-  constructor(private cart: ShoppingCartService, public rout: Router) {
+  constructor(private cart: ShoppingCartService,) {
+    this.title1 = this.product.title;
   }
 
   ngOnInit() {

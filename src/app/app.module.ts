@@ -70,6 +70,7 @@ class CoreModule {
     ProductService,
     ShoppingCartService,
     DocPipe,
+    ProductCardComponent
   ],
   bootstrap: [AppComponent]
 })

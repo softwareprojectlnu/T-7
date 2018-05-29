@@ -15,7 +15,7 @@ import {ProductPageComponent} from './product-page/product-page.component';
 
 const routes: Routes = [
   {path: '', component: ProductsComponent},
-  {path: 'app-product-page/:key', component: ProductPageComponent},
+  {path: 'productt/:key', component: ProductPageComponent},
   {path: 'cart', component: CartComponent},
   {path: 'login', component: LoginComponent},
   {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},

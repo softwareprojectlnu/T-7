@@ -4,23 +4,17 @@
     <th>Name</th>
     <th>Category</th>
     <th>Price</th>
-    <th>Edit </th>
-    <th>Remove</th>
+    <th>Descripeion</th>
+
 
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let product of products$ | async">
-    <td>{{ product.title }}</td>
-    <td> {{(product.category | doc| async)?.name}}</td>
-    <td>{{ product.price | currency:'EUR':'symbol' }}</td>
-    <td>
-      <a [routerLink]="['/admin/products/', product.key]" class="btn btn-secondary">Edit</a>
-    </td>
-    <td>
-      <a class="btn btn-secondary" (click)="productService.remove(product.key)">Remove</a>
-    </td>
-
+  <tr>
+    <td>{{ productt.title }}</td>
+    <td> {{(productt.category | doc| async)?.name}}</td>
+    <td>{{ productt.price | currency:'EUR':'symbol'}}</td>
+    <td>{{ productt.desc }}</td>
   </tr>
   </tbody>
 </table>
