@@ -1,0 +1,63 @@
+
+<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />-->
+<!--<div class="container">-->
+  <!--<div class="row-height">-->
+    <!--<div class="row">-->
+      <!--<div class="col-height col-middle col-xs-5 pull-left card" style="width: 18rem;">-->
+        <!--<div class="col-xs-12 text-center" >-->
+          <!--<h3 class="text-center">Shipping Address</h3>-->
+          <!--<h1 class="text-center">address</h1>-->
+
+        <!--</div>-->
+        <!--<div class="col-xs-12 text-center">-->
+          <!--<a href="javascript:void(0);" class="btn big-btn no-border red-background unstyle-anchor" style="padding: 13px 50px;">Login!</a>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="col-height col-middle col-xs-5 pull-right card" style="width: 18rem;">-->
+        <!--<div class="col-xs-12 text-center">-->
+          <!--<h3 class="heading-s1">Sign UP</h3>-->
+        <!--</div>-->
+        <!--<div class="col-xs-12 text-center">-->
+          <!--<a href="javascript:void(0);" class="btn big-btn no-border red-background unstyle-anchor" style="padding: 13px 50px;">Sign Up!</a>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<div class="pull-left">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h6 class="card-title">Address</h6>
+      <p class="card-text"></p>
+    </div>
+  </div>
+</div>
+
+
+<div class="pull-right">
+  <div class="card-hello" style="width: 18rem;">
+    <div class="card-body">
+      <button class="btn btn-secondary input-addon d-none d-sm-block">
+        <i class="fa fa-plus" aria-hidden="true">Place Your Order</i>
+      </button>      <p class="card-text">Total</p>
+      <tr *ngFor="let item of items$ | async;trackBy:trackByFn">
+        <th>{{ cartTotal$ | async | currency:'EUR':'symbol' }}</th>
+      </tr>
+
+    </div>
+  </div>
+</div>
+
+
+<button class="btn btn-outline-info" type="submit" (click) = "checkout()">checkout</button>
+
+<tr *ngFor="let item of items$ | async;trackBy:trackByFn">
+  <div *ngIf="nu < lim">
+    {{updateItem(item.product, item.amount)}}
+  </div>
+</tr>
+
+
+
