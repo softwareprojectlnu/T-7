@@ -11,7 +11,7 @@ export class AdminAuthGuard implements CanActivate {
 
   canActivate(route, state: RouterStateSnapshot){
     return this.auth.user$.map((user) => {
-      if(user && !user.isAdmin) return true;
+      if(user && user.isAdmin) return true;
       this.router.navigate(['access-denied']);;
     });
   }

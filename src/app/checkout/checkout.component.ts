@@ -81,9 +81,8 @@ export class CheckoutComponent implements OnInit {
 
     order.products = this.an;
     this.ord.save(order);
-    this.cart.remove(this.route.snapshot.paramMap.get('key'));
+    // this.cart.remove(this.route.snapshot.paramMap.get('key'));
     this.router.navigateByUrl('');
-
   }
 
   trackByFn(index, item: CartItem) {
