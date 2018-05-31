@@ -1,31 +1,6 @@
 
-<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />-->
-<!--<div class="container">-->
-  <!--<div class="row-height">-->
-    <!--<div class="row">-->
-      <!--<div class="col-height col-middle col-xs-5 pull-left card" style="width: 18rem;">-->
-        <!--<div class="col-xs-12 text-center" >-->
-          <!--<h3 class="text-center">Shipping Address</h3>-->
-          <!--<h1 class="text-center">address</h1>-->
 
-        <!--</div>-->
-        <!--<div class="col-xs-12 text-center">-->
-          <!--<a href="javascript:void(0);" class="btn big-btn no-border red-background unstyle-anchor" style="padding: 13px 50px;">Login!</a>-->
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<div class="col-height col-middle col-xs-5 pull-right card" style="width: 18rem;">-->
-        <!--<div class="col-xs-12 text-center">-->
-          <!--<h3 class="heading-s1">Sign UP</h3>-->
-        <!--</div>-->
-        <!--<div class="col-xs-12 text-center">-->
-          <!--<a href="javascript:void(0);" class="btn big-btn no-border red-background unstyle-anchor" style="padding: 13px 50px;">Sign Up!</a>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
-
+<div *ngIf="!showorder">
 <table class="table">
   <thead>
   <tr>
@@ -38,7 +13,7 @@
   <tr *ngFor="let item of items$ | async; trackBy:trackByFn; let i = index">
     <td>{{ (item.product | doc | async)?.title }}</td>
     <td>{{ (item.product | doc | async)?.price | currency:'EUR':'symbol' }}</td>
-    <td id="ass">{{itemnumber[i]}}</td>
+    <td id="#ass">{{itemnumber[i]}}</td>
 
   </tr>
   </tbody>
@@ -50,15 +25,19 @@
   </tr>
   </tfoot>
 </table>
+  </div>
 
 
-
-
-
+<div *ngIf="!showorder">
 <button class="btn btn-outline-info" type="submit" (click) = "checkout()">checkout</button>
+  </div>
 
 
 
-
+          <div *ngIf="showorder">
+            <h1 id="hey2">Thank you For your Purchase</h1>
+            <h2 id="hey1">Your order number is</h2>
+            <h3 id="hey1">{{ord.getkey()}}</h3>
+          </div>
 
 

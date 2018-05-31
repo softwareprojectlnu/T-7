@@ -38,8 +38,7 @@ export class CheckoutComponent implements OnInit {
   lim: number;
   checked: boolean;
   Address$: Observable<AddressModel[]>;
-  str: string;
-
+  showorder: boolean;
   constructor(public productService: ProductService, private cart: ShoppingCartService, private router: Router, private ord: OrderService, private route: ActivatedRoute, private user: UserService, public af: AngularFireAuth, public ad: AddressService) {
     this.items$ = cart.getItems();
     this.itemsasarray = cart.getarrayitems();
@@ -47,10 +46,8 @@ export class CheckoutComponent implements OnInit {
     this.lim = 0;
     this.checked = false;
     this.Address$ = ad.getAll();
-    this.itemnumber = cart.getitemnumber();
     this.Address$ = ad.getAll().map(adresses => adresses.filter(p => p.uid === this.uid));
-    this.str = '  ';
-
+    this.showorder = false;
     this.cartTotal$ = this.items$.switchMap(items => {
       this.lim += 1;
       return Observable.from(items).mergeMap(line => {
@@ -74,13 +71,14 @@ export class CheckoutComponent implements OnInit {
         this.ordered = ordered;
       });
     }
+    this.itemnumber = this.cart.getitemnumber();
   }
   // trackByFn(index, item: CartItem) {
   //   return item.product != null ? item.product.id : null;
   // }
 
   updateItem(product: firebase.firestore.DocumentReference, amount: number) {
-    if (this.checked == true) {
+    if (this.checked === true) {
       this.cart.setItemfinal(product.id, +amount);
       this.nu += 1;
     }
@@ -91,13 +89,15 @@ export class CheckoutComponent implements OnInit {
     const order = this.ordered;
     order.id = this.uid;
     order.products = this.itemsasarray;
+    order.address = this.ord.getaddress()
     this.ord.save(order);
     this.cart.removeallItems();
-    this.router.navigateByUrl('');
+    this.showorder = true;
   }
 
   trackByFn(index, item: CartItem) {
     return item.product != null ? item.product.id : null;
   }
+
 
 }

@@ -16,3 +16,6 @@
 .btn-secondary{
   margin: 0px 5px 0px 5px;
 }
+.invalid-feedback{
+  display: block;
+}

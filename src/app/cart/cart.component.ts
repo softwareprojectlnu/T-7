@@ -14,6 +14,7 @@ import {number} from 'ng2-validation/dist/number';
 import {AddressModel} from '../models/Address-Model';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {AddressService} from '../services/address.service';
+import {OrderService} from '../services/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -27,13 +28,14 @@ export class CartComponent implements OnInit {
   nu: number;
   checked: boolean;
   Address$: Observable<AddressModel[]>;
-  useraddress: string [] = [];
+ useraddress: string [] = [];
   uid: string;
   hasaddress: boolean;
   hello: boolean;
+  adresschosen: string;
 
 
-  constructor(public product: ProductService, private cart: ShoppingCartService, private router: Router, public af: AngularFireAuth, public ad: AddressService) {
+  constructor(public product: ProductService, private cart: ShoppingCartService, private router: Router, public af: AngularFireAuth, public ad: AddressService, public ord: OrderService) {
     this.items$ = cart.getItems();
     this.lim = 0;
     this.nu = 0;
@@ -41,7 +43,8 @@ export class CartComponent implements OnInit {
     this.Address$ = ad.getAll().map(adresses => adresses.filter(p => p.uid === this.uid));
     this.hasaddress = false;
     this.hello = false;
-    cart.delete();
+    this.adresschosen = "";
+    // cart.delete();
 
 
     this.af.auth.onAuthStateChanged((user) => {
@@ -76,22 +79,25 @@ export class CartComponent implements OnInit {
     if (this.checked == true) {
       this.cart.setItemfinal(product.id, +amount);
       this.nu += 1;
-    }else{
-      if (amount < 0) amount = 0;
+    } else {
+      if (amount < 0) { amount = 0; }
       this.cart.setItem(product.id, +amount);
     }
   }
 
-hey(){
+hey() {
   this.checked = true;
 }
   navigatetocheckout() {
-    this.router.navigateByUrl('cart/checkout');
+    if(this.adresschosen.length > 3){
+      this.ord.setaddress(this.adresschosen);
+      this.router.navigateByUrl('cart/checkout');
+    }
   }
-  addressistrue(){
+  addressistrue() {
     this.hasaddress = true;
   }
-  navigatetoaddress(){
+  navigatetoaddress() {
     this.router.navigateByUrl('Address');
     this.hello = true;
   }

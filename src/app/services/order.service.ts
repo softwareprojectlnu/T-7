@@ -13,6 +13,8 @@ import {orderp} from '../models/orderp';
 @Injectable()
 export class OrderService {
   private orders: AngularFirestoreCollection<orderp>;
+  ordernumber: string;
+  address: string;
   constructor(private afs: AngularFirestore) {
     this.orders = afs.collection<orderp>('orders');
   }
@@ -20,6 +22,8 @@ export class OrderService {
   add(order: orderp) {
     return this.orders.add(order).then(reference => {
       // order.key = reference.id;
+      order.key = reference.id;
+      this.ordernumber = reference.id;
       this.update(reference.id, order);
     });
   }
@@ -46,5 +50,14 @@ export class OrderService {
 
   save(order: orderp) {
       this.add(order);
+  }
+  getkey(): string{
+    return this.ordernumber;
+  }
+  setaddress(hey: string) {
+    this.address = hey;
+  }
+  getaddress(){
+    return this.address;
   }
 }
