@@ -29,6 +29,9 @@ import {AdminProductFormComponent} from './admin/admin-add-product/admin-add-pro
 import {ProductCardComponent} from './product-card/product-card.component';
 import {DocPipe} from './doc.pipe';
 import {AppRoutingModule} from './app-routing.module';
+
+import {NgxPaginationModule} from 'ngx-pagination';
+import { SearchComponent } from './search/search.component';
 import {AddCategoryComponent} from './admin/admin-add-category/admin-add-category.component';
 
 class CoreModule {
@@ -48,10 +51,11 @@ class CoreModule {
     AccessDeniedComponent,
     AdminProductFormComponent,
     ProductCardComponent,
-    DocPipe
-    
+    DocPipe,
+    SearchComponent
   ],
   imports: [
+    NgxPaginationModule,
     BrowserModule,
     AppRoutingModule,
     NgbModule.forRoot(),
