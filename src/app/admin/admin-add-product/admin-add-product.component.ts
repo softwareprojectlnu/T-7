@@ -55,7 +55,7 @@ export class AdminProductFormComponent implements OnInit {
     }
     if (event.target.checked === false) {
       this.product.price = this.product.oldPrice;
-      //this.product.newPrice = 0;
+      this.product.newPrice = 0;
       //this.product.newPrice = null;
       //this.product.percent = null;
     }
