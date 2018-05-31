@@ -8,6 +8,7 @@
     <th>Price</th>
     <th>Edit </th>
     <th>Remove</th>
+    <th>On sale</th>
 
   </tr>
   </thead>
@@ -21,6 +22,9 @@
     </td>
     <td>
     <a class="btn btn-secondary" (click)="productService.remove(product.key)">Remove</a>
+    </td>
+    <td *ngIf="product.onSale==true">
+      test
     </td>
   </tr> 
   </tbody>
