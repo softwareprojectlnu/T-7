@@ -26,38 +26,39 @@
   <!--</div>-->
 <!--</div>-->
 
-<div class="pull-left">
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h6 class="card-title">Address</h6>
-      <p class="card-text"></p>
-    </div>
-  </div>
-</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Product</th>
+    <th scope="col">Price</th>
+    <th scope="col" id="ass">Quantity</th>
+  </tr>
+  </thead>
+
+  <tr *ngFor="let item of items$ | async; trackBy:trackByFn; let i = index">
+    <td>{{ (item.product | doc | async)?.title }}</td>
+    <td>{{ (item.product | doc | async)?.price | currency:'EUR':'symbol' }}</td>
+    <td id="ass">{{itemnumber[i]}}</td>
+
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <th>Total: </th>
+    <th>{{ cartTotal$ | async | currency:'EUR':'symbol' }}</th>
+    <th></th>
+  </tr>
+  </tfoot>
+</table>
 
 
-<div class="pull-right">
-  <div class="card-hello" style="width: 18rem;">
-    <div class="card-body">
-      <button class="btn btn-secondary input-addon d-none d-sm-block">
-        <i class="fa fa-plus" aria-hidden="true">Place Your Order</i>
-      </button>      <p class="card-text">Total</p>
-      <tr *ngFor="let item of items$ | async;trackBy:trackByFn">
-        <th>{{ cartTotal$ | async | currency:'EUR':'symbol' }}</th>
-      </tr>
 
-    </div>
-  </div>
-</div>
 
 
 <button class="btn btn-outline-info" type="submit" (click) = "checkout()">checkout</button>
 
-<tr *ngFor="let item of items$ | async;trackBy:trackByFn">
-  <div *ngIf="nu < lim">
-    {{updateItem(item.product, item.amount)}}
-  </div>
-</tr>
+
+
 
 
 

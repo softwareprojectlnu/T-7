@@ -1,8 +1,8 @@
+<div *ngIf="!checked">
 <table class="table">
   <thead>
   <tr>
     <th scope="col">Product</th>
-    <th scope="col">Quantity</th>
     <th scope="col">Price</th>
     <th style="width:200px;" scope="col">Amount</th>
     <th scope="col">Total</th>
@@ -12,8 +12,9 @@
 
   <tr *ngFor="let item of items$ | async;trackBy:trackByFn">
     <td>{{ (item.product | doc | async)?.title }}</td>
-    <td>{{ (item.product | doc | async)?.quantity }}</td>
     <td>{{ (item.product | doc | async)?.price | currency:'EUR':'symbol' }}</td>
+
+
     <td>
       <div class="input-group">
         <button (click)="updateItem(item.product, (1*item.amount)-1)" [disabled]="item.amount==0" class="btn btn-secondary input-addon	d-none d-sm-block">
@@ -40,5 +41,55 @@
   </tr>
   </tfoot>
 </table>
+  </div>
 
-<button class="btn btn-warning" type="submit" (click)="navigatetocheckout()">Proceed to checkout</button>
+<div *ngIf="!checked">
+  <button class="btn btn-warning" type="submit" (click)="hey()">proceed If Items in basket are correct</button>
+</div>
+
+<tr *ngFor="let item of items$ | async;trackBy:trackByFn">
+  <div *ngIf="checked == true">
+    <div *ngIf="nu < lim">
+      {{updateItem(item.product,item.amount)}}
+    </div>
+  </div>
+</tr>
+<div *ngIf="checked">
+  <div class="pull-left">
+    <div class="card" style="width: 30rem;">
+      <div class="card-body">
+        <h6 class="card-title">Select Shipping Address</h6>
+        <p class="card-text"></p>
+        <div class="form-group">
+          <select [(ngModel)]="Address$" #aaddress="ngModel" name="aaddress"
+                  [class.is-invalid]="aaddress.touched && aaddress.invalid" id="aadress"
+                  class="form-control" required>
+            <option *ngFor="let aaddress of Address$ | async;" [value]="aaddress.address" >
+             <div *ngIf="aaddress.uid == this.uid">
+                {{ aaddress.address }}
+                {{addressistrue()}}
+              </div>
+            </option>
+          </select>
+          <div class="invalid-feedback" *ngIf="aaddress.touched && aaddress.invalid">
+            Category is required.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="hasaddress">
+  <div *ngIf="checked">
+    <button class="btn btn-warning" type="submit" (click)="navigatetocheckout()">Go to checkout</button>
+  </div>
+</div>
+
+<div *ngIf="!hasaddress">
+  <div *ngIf="checked">
+    <button class="btn btn-warning" type="submit" (click)="navigatetoaddress()">create address</button>
+  </div>
+</div>
+

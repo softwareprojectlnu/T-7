@@ -18,7 +18,6 @@ export class AdminProductFormComponent implements OnInit {
   key: string;
   product: Product = <Product>{};
   categoryKey: string;
-
   categories$: Observable<Category[]>;
 
   constructor(
@@ -65,4 +64,5 @@ export class AdminProductFormComponent implements OnInit {
 
     task.downloadURL().take(1).subscribe(url => this.product.imageUrl = url);
   }
+
 }

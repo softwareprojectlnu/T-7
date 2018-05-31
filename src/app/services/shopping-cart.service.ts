@@ -21,15 +21,18 @@ export interface CartItem {
   quantity: number;
 }
 export interface ShoppingCart {
-  key: string;
   items: AngularFirestoreCollection<CartItem>;
+  key: string;
 }
 
 @Injectable()
 export class ShoppingCartService {
   db: AngularFirestoreCollection<ShoppingCart>;
   itemsarray: any [] = [];
-  constructor(private afs: AngularFirestore, private auth: AuthService, private products: ProductService) {
+  itemkey: string[] = [];
+  itemsnumber: number[] = [];
+  hey: string;
+    constructor(private afs: AngularFirestore, private auth: AuthService, private products: ProductService) {
     this.db = afs.collection<ShoppingCart>('shopping-carts');
   }
 
@@ -75,6 +78,8 @@ export class ShoppingCartService {
         const item = {product: this.products.getRef(productKey).ref, amount: amount};
         this.itemsarray.push(productKey);
         this.itemsarray.push(amount);
+        this.itemkey.push(productKey);
+        this.itemsnumber.push(amount);
         return currentCart.collection<CartItem>('items').doc(productKey).set(item);
       }
     ).toPromise();
@@ -84,6 +89,12 @@ export class ShoppingCartService {
     return this.currentCart$.switchMap(currentCart =>
       currentCart.collection('items').doc(productKey).delete()
     ).toPromise();
+  }
+  removeallItems() {
+      for (let i = 0; i < this.itemkey.length; i ++) {
+        this.hey = this.itemkey[i];
+        this.removeItem(this.hey);
+  }
   }
 
   getItem(productKey: string): Observable<CartItem> {
@@ -101,8 +112,14 @@ export class ShoppingCartService {
   getarrayitems(): any[] {
     return this.itemsarray;
   }
+  getitemnumber(): number[] {
+      return this.itemsnumber;
+  }
   remove(key: string): Promise<void> {
     return this.db.doc(key).delete();
+  }
+  delete(){
+      this.itemsnumber.length = 0;
   }
 
 }

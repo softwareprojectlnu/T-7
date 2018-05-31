@@ -5,7 +5,7 @@ import {AngularFirestore} from 'angularfire2/firestore';
 import {AngularFirestoreCollection} from 'angularfire2/firestore/collection/collection';
 
 import {Observable} from 'rxjs/Observable';
-import {Product} from './../models/product';
+import {Product} from '../models/product';
 import {Injectable} from '@angular/core';
 
 import 'rxjs/add/operator/map';

@@ -23,7 +23,6 @@ import {CartComponent} from './cart/cart.component';
 import {LoginComponent} from './login/login.component';
 import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component';
 import {AdminProductsComponent} from './admin/admin-products/admin-products.component';
-import {OrdersComponent} from './orders/orders.component';
 import {AccessDeniedComponent} from './access-denied/access-denied.component';
 import {AdminProductFormComponent} from './admin/admin-add-product/admin-add-product.component';
 import {ProductCardComponent} from './product-card/product-card.component';
@@ -46,7 +45,6 @@ class CoreModule {
     LoginComponent,
     AdminOrdersComponent,
     AdminProductsComponent,
-    OrdersComponent,
     AccessDeniedComponent,
     AdminProductFormComponent,
     ProductCardComponent,

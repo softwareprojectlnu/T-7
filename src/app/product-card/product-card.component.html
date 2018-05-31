@@ -4,6 +4,7 @@
     <h4 class="card-title">{{ product.title }}</h4>
     <p class="card-text">{{ product.price | currency:'EUR':'symbol' }}</p>
     <div *ngIf="product.key">
+      <div *ngIf="isLoggedIn">
       <button class="btn btn-block btn-primary" *ngIf="ordered==0" (click)="increase()">Order</button>
       <div class="input-group" *ngIf="ordered!=0">
         <button (click)="decrease()" class="input-group-addon btn btn-secondary">
@@ -14,6 +15,7 @@
           <i class="fa fa-plus" aria-hidden="true"></i>
         </button>
       </div>
+    </div>
     </div>
   </div>
 </div>

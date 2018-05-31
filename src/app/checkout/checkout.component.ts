@@ -15,31 +15,41 @@ import 'rxjs/add/operator/take';
 import {AngularFireStorage} from 'angularfire2/storage';
 import {unescapeIdentifier} from '@angular/compiler';
 import {AngularFireAuth} from 'angularfire2/auth';
+import {AddressService} from '../services/address.service';
+import {AddressModel} from '../models/Address-Model';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
+
 export class CheckoutComponent implements OnInit {
   key: string;
-  an: any[] = [];
+  itemsasarray: any[] = [];
+  itemnumber: number [] = [];
   ordered: orderp = <orderp> {};
   items$: Observable<CartItem[]>;
   ite: CartItem = <CartItem> {};
   cartTotal$: Observable<number>;
   product: Product = <Product>{};
-  uidd: string;
+  uid: string;
   nu: number;
   lim: number;
+  checked: boolean;
+  Address$: Observable<AddressModel[]>;
+  str: string;
 
-  constructor(public productService: ProductService, private cart: ShoppingCartService, private router: Router,
-              private ord: OrderService, private route: ActivatedRoute, private user: UserService, public af: AngularFireAuth) {
+  constructor(public productService: ProductService, private cart: ShoppingCartService, private router: Router, private ord: OrderService, private route: ActivatedRoute, private user: UserService, public af: AngularFireAuth, public ad: AddressService) {
     this.items$ = cart.getItems();
-    this.an = cart.getarrayitems();
+    this.itemsasarray = cart.getarrayitems();
     this.nu = 0;
     this.lim = 0;
-
+    this.checked = false;
+    this.Address$ = ad.getAll();
+    this.itemnumber = cart.getitemnumber();
+    this.Address$ = ad.getAll().map(adresses => adresses.filter(p => p.uid === this.uid));
+    this.str = '  ';
 
     this.cartTotal$ = this.items$.switchMap(items => {
       this.lim += 1;
@@ -50,7 +60,7 @@ export class CheckoutComponent implements OnInit {
 
     this.af.auth.onAuthStateChanged((user) => {
         if (user != null) {
-          this.uidd = user.uid;
+          this.uid = user.uid;
 
         }
       }
@@ -70,22 +80,24 @@ export class CheckoutComponent implements OnInit {
   // }
 
   updateItem(product: firebase.firestore.DocumentReference, amount: number) {
-    this.cart.setItemfinal(product.id, +amount);
-    this.nu += 1;
+    if (this.checked == true) {
+      this.cart.setItemfinal(product.id, +amount);
+      this.nu += 1;
+    }
   }
 
   checkout() {
-    console.log(this.lim);
+    this.checked = true;
     const order = this.ordered;
-    order.id = this.uidd;
-
-    order.products = this.an;
+    order.id = this.uid;
+    order.products = this.itemsasarray;
     this.ord.save(order);
-    // this.cart.remove(this.route.snapshot.paramMap.get('key'));
+    this.cart.removeallItems();
     this.router.navigateByUrl('');
   }
 
   trackByFn(index, item: CartItem) {
     return item.product != null ? item.product.id : null;
   }
+
 }

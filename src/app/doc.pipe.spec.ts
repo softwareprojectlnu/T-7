@@ -1,7 +1,7 @@
 import { DocPipe } from './doc.pipe';
 
 describe('DocPipe', () => {
-  it('create an instance', () => {
+  it('create itemsasarray instance', () => {
     const pipe = new DocPipe();
     expect(pipe).toBeTruthy();
   });

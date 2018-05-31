@@ -6,6 +6,7 @@
   </button>
   <div [ngbCollapse]="isCollapsed" class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
+      <div *ngIf="isLoggedIn">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="cart">
           <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -13,6 +14,7 @@
           <span *ngIf="itemsInCart" class="badge badge-pill badge-warning">{{ itemsInCart }}</span>
         </a>
       </li>
+      </div>
       <li *ngIf="user && user.isAdmin" ngbDropdown class="nav-item">
         <a ngbDropdownToggle class="nav-link" id="adminDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Admin
