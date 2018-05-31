@@ -1,4 +1,6 @@
 <div class="card">
+      <div *ngIf="product.onSale==true">
+      <p style="color: orangered; text-align: center;">On sale!</p>
   <img class="card-img-top" [src]="product.imageUrl" [alt]="product.title">
   <div class="card-body">
     <h4 class="card-title">{{ product.title }}</h4>
@@ -15,8 +17,7 @@
         </button>
       </div>
     </div>
-    <div *ngIf="product.onSale==true" [(ngModel)]="product.oldPrice" >
-      <p style="color: blueviolet;">On sale!</p>
+    <div *ngIf="product.onSale==true" style="color: orangered;>
       <p>Was {{product.oldPrice | currency:'EUR':'symbol'}}, now {{product.price | currency:'EUR':'symbol'}}! ({{percent | number:'2.0-0'}}% off!)</p>
     </div>
   </div>
