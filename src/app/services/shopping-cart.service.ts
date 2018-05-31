@@ -17,6 +17,8 @@ import 'rxjs/add/observable/fromPromise';
 export interface CartItem {
   product: firebase.firestore.DocumentReference;
   amount: number;
+  quantity: number;
+
 }
 export interface ShoppingCart {
   key: string;
@@ -27,7 +29,10 @@ export interface ShoppingCart {
 export class ShoppingCartService {
 
   db: AngularFirestoreCollection<ShoppingCart>;
-
+  itemsarray: any [] = [];
+  itemkey: string[] = [];
+  itemsnumber: number[] = [];
+  hey: string;
   constructor(private afs: AngularFirestore, private auth: AuthService, private products: ProductService) {
     this.db = afs.collection<ShoppingCart>('shopping-carts');
   }
@@ -59,15 +64,33 @@ export class ShoppingCartService {
 
   setItem(productKey: string, amount: number) {
     return this.currentCart$.switchMap(currentCart =>{
-        let item = { product: this.products.getRef(productKey).ref, amount: amount };
+        const item = { product: this.products.getRef(productKey).ref, amount: amount };
         return currentCart.collection<CartItem>('items').doc(productKey).set(item);
       }
     ).toPromise();
   }
+  setItemfinal(productKey: string, amount: number) {
+    return this.currentCart$.switchMap(currentCart => {
+        const item = {product: this.products.getRef(productKey).ref, amount: amount};
+        this.itemsarray.push(productKey);
+        this.itemsarray.push(amount);
+        this.itemkey.push(productKey);
+        this.itemsnumber.push(amount);
+        return currentCart.collection<CartItem>('items').doc(productKey).set(item);
+      }
+    ).toPromise();
+  }
+
   removeItem(productKey: string): Promise<void> {
     return this.currentCart$.switchMap(currentCart =>
       currentCart.collection('items').doc(productKey).delete()
     ).toPromise();
+  }
+  removeallItems() {
+    for (let i = 0; i < this.itemkey.length; i ++) {
+      this.hey = this.itemkey[i];
+      this.removeItem(this.hey);
+    }
   }
   getItem(productKey: string): Observable<CartItem> {
     return this.currentCart$.switchMap(currentCart =>
@@ -78,5 +101,17 @@ export class ShoppingCartService {
     return this.currentCart$.switchMap(currentCart =>
       currentCart.collection<CartItem>('items').valueChanges()
     );
+  }
+  getarrayitems(): any[] {
+    return this.itemsarray;
+  }
+  getitemnumber(): number[] {
+    return this.itemsnumber;
+  }
+  remove(key: string): Promise<void> {
+    return this.db.doc(key).delete();
+  }
+  delete(){
+    this.itemsnumber.length = 0;
   }
 }

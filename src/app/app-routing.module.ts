@@ -13,11 +13,15 @@ import {AdminOrdersComponent} from './admin/admin-orders/admin-orders.component'
 import {AdminAuthGuard} from './guards/admin-auth-guard.service';
 import {SearchComponent} from './search/search.component';
 import { AddCategoryComponent } from './admin/admin-add-category/admin-add-category.component';
+import {SinglePageComponent} from './single-page/single-page.component';
+import {CheckoutComponent} from './checkout/checkout.component';
+import {AddressComponent} from './address/address.component';
 
 const routes: Routes = [
   {path: '', component: ProductsComponent},
-
+  {path: 'single-page/:key', component: SinglePageComponent},
   {path: 'cart', component: CartComponent},
+
   {path: 'login', component: LoginComponent},
   {path: 'search', component: SearchComponent},
   {path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
@@ -49,6 +53,9 @@ const routes: Routes = [
 
   {path: 'access-denied', component: AccessDeniedComponent},
   {path: 'access-denied', component: AddCategoryComponent},
+  {path: 'cart/checkout', component: CheckoutComponent},
+  {path: 'Address', component: AddressComponent}
+
 
 ];
 

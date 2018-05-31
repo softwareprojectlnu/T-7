@@ -58,6 +58,16 @@
         </div>
       </div>
 
+      <div>
+        <label>
+          <input name="idk123" [(ngModel)]="product.onSale" type="checkbox" [checked]="true" (change)="checking($event)">
+          Special deal.
+        </label>
+        <div class="form-group" *ngIf="asdf==true || product.onSale == true">
+          <input name="stuff1" [(ngModel)]="product.newPrice" type="number" id="newprice3" #newprice="ngModel"> Add the new price here.
+        </div>
+      </div>
+
       <button [disabled]="f.invalid" class="btn btn-primary" type="submit">Save</button>
 
       <button type="button" *ngIf="product?.key" (click)="remove()" class="btn btn-danger">Delete</button>

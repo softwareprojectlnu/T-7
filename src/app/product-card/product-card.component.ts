@@ -16,6 +16,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   @Input('product') product: Product;
   subscription: Subscription;
   ordered = 0;
+  percent = 0;
   @Input() limit: number = 20;
   truncating = true;
   len: number;
@@ -28,8 +29,11 @@ export class ProductCardComponent implements OnInit, OnDestroy {
       this.subscription = this.cart.getItem(this.product.key).subscribe(cartItem => {
         if (cartItem !== null) this.ordered = cartItem['amount'];
         this.len = this.product.desc.length;
-
       });
+    }
+    if (this.product.onSale) {
+      this.percent = this.product.oldPrice - this.product.price;
+      this.percent = (this.percent / this.product.oldPrice) * 100;
     }
   }
   ngOnDestroy() {

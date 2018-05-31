@@ -11,4 +11,7 @@ export interface Product {
     imageUrl: string;
     desc?: string;
     amount: number;
+  onSale: false;
+  oldPrice: number;
+  newPrice: number;
 }

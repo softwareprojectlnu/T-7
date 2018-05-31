@@ -29,11 +29,15 @@ import {AdminProductFormComponent} from './admin/admin-add-product/admin-add-pro
 import {ProductCardComponent} from './product-card/product-card.component';
 import {DocPipe} from './doc.pipe';
 import {AppRoutingModule} from './app-routing.module';
-
 import {NgxPaginationModule} from 'ngx-pagination';
 import { SearchComponent } from './search/search.component';
 import {AddCategoryComponent} from './admin/admin-add-category/admin-add-category.component';
 import { TruncateTextPipe } from './truncate-text.pipe';
+import { SinglePageComponent } from './single-page/single-page.component';
+import { AddressComponent } from './address/address.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import {AddressService} from './services/address.service';
+import {OrderService} from './services/order.service';
 
 class CoreModule {
 }
@@ -43,6 +47,7 @@ class CoreModule {
     AddCategoryComponent,
     AppComponent,
     NavbarComponent,
+
     ProductsComponent,
     CartComponent,
     LoginComponent,
@@ -54,7 +59,10 @@ class CoreModule {
     ProductCardComponent,
     DocPipe,
     SearchComponent,
-    TruncateTextPipe
+    TruncateTextPipe,
+    SinglePageComponent,
+    AddressComponent,
+    CheckoutComponent
   ],
   imports: [
     NgxPaginationModule,
@@ -65,7 +73,6 @@ class CoreModule {
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    //   AngularFirestoreModule.enablePersistence(),
     FormsModule,
     CustomFormsModule,
     RouterModule],
@@ -77,7 +84,9 @@ class CoreModule {
     CategoryService,
     ProductService,
     ShoppingCartService,
-    DocPipe
+    DocPipe,
+    AddressService,
+    OrderService,
   ],
   bootstrap: [AppComponent]
 })

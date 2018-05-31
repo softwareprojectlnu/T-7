@@ -12,13 +12,14 @@ import 'rxjs/add/operator/take';
 @Component({
   selector: 'app-admin-add-product',
   templateUrl: './admin-add-product.component.html',
-  
+
   styleUrls: ['./admin-add-product.component.css']
 })
 export class AdminProductFormComponent implements OnInit {
   key: string;
   product: Product = <Product>{};
   categoryKey: string;
+  private asdf = false;
 
   categories: Observable<category[]>;
 
@@ -42,11 +43,35 @@ export class AdminProductFormComponent implements OnInit {
     }
   }
 
+  checking(event) {
+    if (event.target.checked === true) {
+      this.asdf = true;
+      //this.product.oldPrice = this.product.price;
+      //this.product.price = this.product.newPrice;
+      //this.product.percent = this.product.oldPrice - this.product.price;
+      //this.product.percent = (this.product.percent / this.product.oldPrice) * 100;
+    } else {
+      this.asdf = false;
+    }
+    if (event.target.checked === false) {
+      this.product.price = this.product.oldPrice;
+      //this.product.newPrice = 0;
+      //this.product.newPrice = null;
+      //this.product.percent = null;
+    }
+  }
+
+
   save(form: NgForm) {
     const product = this.product;
 
     product.category = <any>this.categoryService.getRef(form.value.category).ref;
     if (this.key) product.key = this.key;
+
+    if (this.asdf === true) {
+      this.product.oldPrice = this.product.price;
+      this.product.price = this.product.newPrice;
+    }
 
     this.productService.save(product);
 
